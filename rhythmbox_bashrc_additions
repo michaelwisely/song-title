@@ -1,0 +1,21 @@
+BLACK="\[\033[0;38m\]"
+RED="\[\033[0;31m\]"
+RED_BOLD="\[\033[01;31m\]"
+GREEN="\[\033[0;32m\]"
+GREEN_BOLD="\[\033[01;32m\]"
+
+parse_rhythmbox() {
+  rhythmbox-client --print-playing | awk -F / '{print $1}'
+} 
+
+
+
+if [ "$(pidof rhythmbox)" ]
+then
+    export PS1="$GREEN_BOLD\$(parse_rhythmbox) $GREEN\w$ "        
+else 
+    export PS1="$BLACK\u@$RED\h $GREEN\w$ "
+fi
+
+
+
