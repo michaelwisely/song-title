@@ -4,4 +4,6 @@ if [ "$(pidof rhythmbox)" ];
   then
     rhythmbox-client --play
     rhythmbox-client --print-playing | awk -F / '{print "Now playing: "$1}'
+  else
+    echo "Rhythmbox is not running. Please start it!"
 fi
