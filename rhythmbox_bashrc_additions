@@ -1,21 +1,23 @@
 BLACK="\[\033[0;38m\]"
 RED="\[\033[0;31m\]"
 RED_BOLD="\[\033[01;31m\]"
+BLUE="\[\033[01;34m\]"
 GREEN="\[\033[0;32m\]"
 GREEN_BOLD="\[\033[01;32m\]"
 
 parse_rhythmbox() {
-  rhythmbox-client --print-playing | awk -F / '{print $1}'
+  if [ "$(pidof rhythmbox)" ]
+  then
+    rhythmbox-client --print-playing | awk -F / '{print "--"$1"--"}'
+  else 
+    echo '--Paused--'
+  fi
 } 
-
-
 
 if [ "$(pidof rhythmbox)" ]
 then
-    export PS1="$GREEN_BOLD\$(parse_rhythmbox) $GREEN\w$ "        
+    export PS1="$BLUE\$(parse_rhythmbox) $GREEN\w$BLACK$ "        
 else 
-    export PS1="$BLACK\u@$RED\h $GREEN\w$ "
+    export PS1="$BLACK\u@$RED\h $GREEN\w$BLACK$ "
 fi
-
-
 
